@@ -1,0 +1,14 @@
+<?php
+// includes/config.php.example
+
+// Brevo (formerly Sendinblue) Configuration
+define('BREVO_API_KEY', 'YOUR_BREVO_API_KEY');
+define('BREVO_SENDER_EMAIL', 'info@myvpr.org');
+define('BREVO_SENDER_NAME', 'Virtual Praise Room');
+
+// Daily.co Configuration
+define('DAILY_API_KEY', 'YOUR_DAILY_API_KEY');
+define('DAILY_ROOM_DURATION', 86400); // 24 hours default
+
+// KingsChat Configuration
+define('KINGSCHAT_CLIENT_ID', '0dfaaba4-f92f-443d-85a3-1bd329d4f578');

@@ -1,0 +1,17 @@
+{
+  "name": "vpr/api",
+  "description": "Virtual Praise Room API",
+  "require": {
+    "php": ">=7.4",
+    "aws/aws-sdk-php": "^3.200"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.4.33"
+    },
+    "audit": {
+      "ignore": ["PKSA-4t1p-xpk2-nsss", "PKSA-dxyf-6n16-t87m"]
+    }
+  }
+}

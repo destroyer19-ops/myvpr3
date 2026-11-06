@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engage Live Chat</title>
+    <link rel="stylesheet" href="./Ngage/Ngage.css?v=1" />
+    <style>
+        /* ignore this legacy demo styling */
+        #anchor{
+            padding: 20px; min-width: 33%; border: 1px solid #ccc; border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="main-wrapper">
+        <div class="flex justify-content-center ">
+            <div id="anchor" ></div>
+        </div>
+    </div>
+
+    <script src="./Ngage/Ngage.js"></script>
+    <script>
+        let MyNgage = new Ngage({
+            username: 'John doe',
+            userID: 'example-1',
+            anchor: '#anchor',
+            id: "01"
+        });
+
+        MyNgage.init();
+    </script>
+</body>
+
+</html>

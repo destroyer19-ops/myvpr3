@@ -1,0 +1,230 @@
+.dashboard-hero-section {
+    position: relative;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--primary-bg-dark) 0%, var(--secondary-bg-dark) 100%); /* Dark gradient */
+    color: var(--text-light);
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 2rem;
+}
+
+.dashboard-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.dashboard-hero-section .display-5 {
+    font-weight: 700;
+}
+
+.dashboard-hero-section .lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+.dashboard-actions {
+    margin-top: 2rem;
+}
+
+.dashboard-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin: 0.5rem;
+    border: 2px solid transparent;
+}
+
+.dashboard-actions .btn-light {
+    background-color: var(--secondary-bg-dark); /* Dark button background */
+    color: var(--accent-color); /* Accent text color */
+    border-color: var(--border-dark);
+}
+
+.dashboard-actions .btn-light:hover {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+    border-color: var(--accent-color);
+}
+
+.dashboard-actions .btn-outline-light {
+    border-color: var(--border-dark);
+    color: var(--text-light);
+}
+
+.dashboard-actions .btn-outline-light:hover {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+}
+
+.dashboard-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231f1f1f'/%3E%3Cpath d='M0 100 Q 50 50 100 100 V 0 H 0 Z' fill='%23282828'/%3E%3C/svg%3E"); /* Darker SVG fill */
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100% auto;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+/* Sponsorship banner */
+.sponsorship-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    margin: 1rem 0 1.5rem;
+    border-radius: 18px;
+    border: 1px solid var(--border-dark);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f6f6 100%);
+    box-shadow: 0 12px 28px rgba(44, 42, 40, 0.12);
+}
+
+.sponsorship-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(43, 140, 140, 0.12);
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.sponsorship-banner h5 {
+    margin: 0 0 0.4rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.sponsorship-banner p {
+    margin: 0;
+    color: var(--text-muted-dark);
+}
+
+.sponsorship-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (min-width: 992px) {
+    .sponsorship-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Stats Card */
+.stats-card {
+    background: var(--secondary-bg-dark); /* Solid dark background */
+    color: var(--text-light);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    border: 1px solid var(--border-dark);
+    margin-bottom: 2rem;
+}
+
+.stats-card .text-primary {
+    color: var(--accent-color) !important; /* Accent color */
+    font-weight: 600;
+}
+
+.stats-card .display-4 {
+    font-size: 3.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Custom Card for Crusades Table */
+.custom-card {
+    background-color: var(--secondary-bg-dark); /* Dark background */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    border: 1px solid var(--border-dark);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.custom-card .card-title {
+    color: var(--accent-color); /* Accent color */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Custom Table */
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    overflow: hidden; /* Ensures border-radius applies to children */
+    border-radius: 10px; /* Rounded corners for the table itself */
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-top: 1px solid var(--border-dark); /* Dark border */
+    color: var(--text-light); /* Light text */
+}
+
+.custom-table thead th {
+    background-color: var(--primary-bg-dark); /* Darker header background */
+    color: var(--text-light); /* Light text */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--border-dark); /* Dark border */
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: var(--secondary-bg-dark); /* Dark background for even rows */
+}
+
+.custom-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover */
+    cursor: pointer;
+}
+
+.custom-table .btn-info {
+    background-color: var(--accent-color); /* Accent color */
+    border-color: var(--accent-color);
+    color: var(--text-light);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.custom-table .btn-info:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+
+@media (max-width: 768px) {
+    .dashboard-hero-section {
+        padding: 3rem 0;
+        border-radius: 0;
+    }
+
+    .dashboard-actions .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .stats-card .display-4 {
+        font-size: 2.5rem;
+    }
+}

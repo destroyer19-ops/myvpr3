@@ -1,0 +1,60 @@
+# Environment & Secret files
+.env
+.env.local
+.env.*.local
+*.env
+!*.env.example
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build caches & outputs
+dist/
+dist-ssr/
+.vite/
+*.tsbuildinfo
+.eslintcache
+
+# Logs & Runtime
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+php.log
+
+# Databases & Backups
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+*.old
+*.zip
+*.tar.gz
+
+# Uploads & Media (Preserve directory structure via .gitkeep)
+uploads/offerings/*
+!uploads/offerings/.gitkeep
+uploads/videos/*
+!uploads/videos/.gitkeep
+uploads/thumbnails/*
+!uploads/thumbnails/.gitkeep
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo

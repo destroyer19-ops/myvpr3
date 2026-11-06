@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
+@theme {
+  /* Design Tokens mapped to PM Reference Visual Language */
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+  --color-surface-card: #ffffff;
+  
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+  
+  --color-brand-primary: #5b3ee4;
+  --color-brand-primary-hover: #4f2bee;
+  --color-brand-primary-soft: rgba(91, 62, 228, 0.08);
+  
+  --color-brand-accent: #f59e0b;
+  --color-brand-accent-hover: #d97706;
+  
+  --color-brand-indigo: #5b3ee4;
+  --color-brand-indigo-hover: #4f2bee;
+  --color-brand-indigo-light: #eef2ff;
+
+  --color-brand-gold: #f59e0b;
+  --color-brand-gold-hover: #d97706;
+  --color-brand-gold-light: #fef3c7;
+
+  --color-brand-rose: #e11d48;
+  --color-brand-rose-hover: #be123c;
+  --color-brand-rose-light: #fdf2f8;
+
+  --color-brand-teal: #0d9488;
+  --color-brand-teal-hover: #0f766e;
+  --color-brand-teal-light: #eefbf7;
+
+  --color-brand-dark: #0c0d24;
+  
+  --color-border: #f1f5f9;
+  --color-border-subtle: #e2e8f0;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  --font-serif: "Newsreader", "Fraunces", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Global Light Theme Foundation */
+:root {
+  /* Page & Canvas */
+  --bg-canvas: #fcfcfd;
+  --color-bg-page: #fcfcfd;
+  --color-brand-bg: #fcfcfd;
+
+  /* Surfaces & Cards */
+  --card-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-brand-surface: #ffffff;
+
+  /* Primary Typography */
+  --text-main: #0f172a;
+  --color-text-primary: #0f172a;
+  --color-brand-text: #0f172a;
+
+  /* Secondary & Muted Typography */
+  --text-sub: #475569;
+  --text-dim: #94a3b8;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-brand-muted: #64748b;
+
+  /* Borders & Dividers */
+  --border-light: #f1f5f9;
+  --color-border: #f1f5f9;
+  --color-border-subtle: #e2e8f0;
+  --color-brand-border: #e2e8f0;
+
+  /* Primary Brand & Interactive Tokens */
+  --color-brand-primary: #5b3ee4;
+  --color-brand-primary-hover: #4f2bee;
+  --color-brand-primary-soft: rgba(91, 62, 228, 0.08);
+
+  --color-action-primary: #5b3ee4;
+  --color-action-primary-hover: #4f2bee;
+
+  --color-brand-accent: #f59e0b;
+  --color-brand-accent-hover: #d97706;
+  --color-brand-accent-h: #d97706;
+
+  --color-brand-indigo: #5b3ee4;
+  --color-brand-indigo-hover: #4f2bee;
+  --color-brand-indigo-light: #eef2ff;
+
+  --color-brand-gold: #f59e0b;
+  --color-brand-gold-hover: #d97706;
+  --color-brand-gold-light: #fef3c7;
+
+  --color-brand-rose: #e11d48;
+  --color-brand-rose-hover: #be123c;
+  --color-brand-rose-light: #fdf2f8;
+
+  --color-brand-teal: #0d9488;
+  --color-brand-teal-hover: #0f766e;
+  --color-brand-teal-light: #eefbf7;
+
+  --color-brand-dark: #0c0d24;
+
+  /* Feedback & State Tokens */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+}
+
+/* Dark Theme Support (Theme-Aware tokens) */
+[data-theme="dark"], .dark {
+  /* Page & Canvas */
+  --bg-canvas: #0b0f19;
+  --color-bg-page: #0b0f19;
+  --color-brand-bg: #0b0f19;
+
+  /* Surfaces & Cards */
+  --card-bg: #111827;
+  --color-surface: #111827;
+  --color-surface-muted: #1f2937;
+  --color-surface-card: #111827;
+  --color-brand-surface: #111827;
+
+  /* Primary Typography */
+  --text-main: #f9fafb;
+  --color-text-primary: #f9fafb;
+  --color-brand-text: #f9fafb;
+
+  /* Secondary & Muted Typography */
+  --text-sub: #cbd5e1;
+  --text-dim: #94a3b8;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-brand-muted: #94a3b8;
+
+  /* Borders & Dividers */
+  --border-light: #1f2937;
+  --color-border: #1f2937;
+  --color-border-subtle: #374151;
+  --color-brand-border: #374151;
+
+  /* Primary Brand & Interactive Tokens */
+  --color-brand-primary: #818cf8;
+  --color-brand-primary-hover: #6366f1;
+  --color-brand-primary-soft: rgba(129, 140, 248, 0.15);
+
+  --color-action-primary: #6366f1;
+  --color-action-primary-hover: #4f46e5;
+
+  --color-brand-accent: #fbbf24;
+  --color-brand-accent-hover: #f59e0b;
+  --color-brand-accent-h: #f59e0b;
+
+  --color-brand-indigo: #818cf8;
+  --color-brand-indigo-hover: #6366f1;
+  --color-brand-indigo-light: #1e1b4b;
+
+  --color-brand-gold: #fbbf24;
+  --color-brand-gold-hover: #f59e0b;
+  --color-brand-gold-light: #2c1e10;
+
+  --color-brand-rose: #f43f5e;
+  --color-brand-rose-hover: #e11d48;
+  --color-brand-rose-light: #2a1726;
+
+  --color-brand-teal: #14b8a6;
+  --color-brand-teal-hover: #0d9488;
+  --color-brand-teal-light: #102622;
+
+  --color-brand-dark: #000000;
+
+  /* Feedback & State Tokens */
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-danger: #f87171;
+  --color-info: #60a5fa;
+
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-main);
+    background-color: var(--bg-canvas);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+  }
+
+  [data-theme="dark"] body, .dark body {
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: inherit;
+    margin-top: 0;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* iOS Safe Area Padding Utilities */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
+/* Utilities */
+@layer utilities {
+  .content-rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .content-rail-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

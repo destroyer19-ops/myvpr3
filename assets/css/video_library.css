@@ -1,0 +1,177 @@
+
+/* assets/css/video_library.css */
+
+:root {
+    --cinematic-bg: linear-gradient(135deg, #001f3f 0%, #000000 100%);
+    --cinematic-card-bg: rgba(28, 28, 28, 0.8);
+    --cinematic-text: #f0f0f0;
+    --brand-glow-color: rgba(22, 133, 255, 0.5);
+    --primary-accent: #0d6efd;
+}
+
+body {
+    background: var(--cinematic-bg) fixed !important;
+    color: var(--cinematic-text) !important;
+    min-height: 100vh;
+}
+
+.video-library-container h2,
+.video-library-container h3 {
+    color: var(--cinematic-text);
+}
+
+/* Filter Bar */
+.video-filter-form {
+    background-color: var(--cinematic-card-bg);
+    border: 1px solid #2a2a2a;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.video-filter-form .form-label {
+    color: #ccc;
+}
+
+.video-filter-form .form-control,
+.video-filter-form .form-select {
+    background-color: #333;
+    border-color: #444;
+    color: var(--cinematic-text);
+}
+
+.video-filter-form .form-control:focus,
+.video-filter-form .form-select:focus {
+    background-color: #333;
+    border-color: var(--primary-accent);
+    color: var(--cinematic-text);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.video-filter-form .form-check-label {
+    color: #ddd;
+}
+
+.video-filter-form .btn-primary {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+
+.video-filter-form .btn-secondary {
+    background-color: #555;
+    border-color: #555;
+}
+
+
+/* Video Carousel Section */
+.video-carousel-section h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+}
+
+.video-carousel {
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem;
+    gap: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.video-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.video-card-link {
+    text-decoration: none;
+}
+
+.video-card {
+    flex: 0 0 280px;
+    background-color: var(--cinematic-card-bg);
+    border: 1px solid #2a2a2a;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--brand-glow-color);
+}
+
+.video-card-img-wrapper {
+    position: relative;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-card-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 60%);
+    transition: background 0.3s ease;
+}
+
+.video-card:hover .video-card-img-wrapper::before {
+     background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.3) 70%);
+}
+
+.play-icon {
+    position: absolute;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: transform 0.3s ease, color 0.3s ease;
+    transform: scale(0);
+}
+
+.video-card:hover .play-icon {
+    transform: scale(1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.video-card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.video-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cinematic-text);
+    margin-bottom: 0.5rem;
+}
+
+.video-card-text {
+    font-size: 0.9rem;
+    color: #aaa;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.video-card .btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+.no-videos-message {
+    text-align: center;
+    padding: 5rem;
+    color: #888;
+}

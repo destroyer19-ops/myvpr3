@@ -1,0 +1,17 @@
+# SPA Fallback for React Router (Vite build)
+# Every URL that doesn't match a real file/directory gets served index.html
+# so React Router can handle client-side routing.
+# This file goes into new/public/ and Vite copies it to dist/ on build.
+
+Options -MultiViews
+RewriteEngine On
+
+# Don't rewrite for real files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Don't rewrite API requests (they go to /api/index.php)
+RewriteCond %{REQUEST_URI} !^/api/
+
+# Serve index.html for all other routes
+RewriteRule ^ /index.html [L]

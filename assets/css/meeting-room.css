@@ -1,0 +1,154 @@
+.meeting-wrapper {
+    padding-top: 20px; /* Adjust as needed */
+    padding-bottom: 20px; /* Adjust as needed */
+}
+
+.meeting-header {
+    background-color: var(--secondary-bg-dark);
+    color: var(--text-light);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.meeting-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--accent-color); /* Use accent color */
+}
+
+.meeting-body {
+    flex-grow: 1;
+    position: relative;
+    background-color: var(--primary-bg-dark); /* Dark background for the meeting area */
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+#meet {
+    width: 100%;
+    height: 600px; /* Fixed height for the Jitsi iframe */
+    background-color: #263238; /* Jitsi default background */
+}
+
+.meeting-controls {
+    background-color: var(--secondary-bg-dark);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid var(--border-dark);
+}
+
+.control-btn {
+    background-color: transparent;
+    border: 2px solid var(--border-dark);
+    color: var(--text-light);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    color: var(--accent-hover);
+}
+
+.control-btn.danger {
+    border-color: #e91e63; /* Meeting-specific danger color */
+    color: #e91e63;
+}
+
+.control-btn.danger:hover {
+    background-color: #e91e63;
+    color: var(--canva-white);
+}
+
+.share-section {
+    padding: 20px;
+    background-color: var(--secondary-bg-dark);
+    border-top: 1px solid var(--border-dark);
+}
+
+.countdown-timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-light);
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Participants Modal */
+.modal-content {
+    border-radius: 10px;
+    background-color: var(--secondary-bg-dark);
+    color: var(--text-light);
+}
+
+.modal-header {
+    background-color: var(--primary-bg-dark);
+    color: var(--text-light);
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.btn-close {
+    filter: none;
+    opacity: 0.7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.list-group-item {
+    background-color: var(--primary-bg-dark);
+    border-color: var(--border-dark);
+    color: var(--text-light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .meeting-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    .meeting-header h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .meeting-controls {
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    #meet {
+        height: 400px;
+    }
+
+    .share-section {
+        padding: 15px;
+    }
+}

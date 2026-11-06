@@ -1,0 +1,359 @@
+--
+-- Database: `virtual_praise_room`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_users`
+--
+
+CREATE TABLE `praise_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `account_type` varchar(20) NOT NULL DEFAULT 'individual',
+  `country` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `region` varchar(100) DEFAULT NULL,
+  `satellite_campus` varchar(100) DEFAULT NULL,
+  `church` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_meetings`
+--
+
+CREATE TABLE `praise_meetings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `meeting_code` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `meeting_code` (`meeting_code`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_meeting_sessions`
+--
+
+CREATE TABLE `praise_meeting_sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meeting_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `duration` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `meeting_id` (`meeting_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `praise_meetings`
+--
+ALTER TABLE `praise_meetings`
+  ADD CONSTRAINT `praise_meetings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `praise_meeting_sessions`
+--
+ALTER TABLE `praise_meeting_sessions`
+  ADD CONSTRAINT `praise_meeting_sessions_ibfk_1` FOREIGN KEY (`meeting_id`) REFERENCES `praise_meetings` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `praise_meeting_sessions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_crusades`
+--
+
+CREATE TABLE `praise_crusades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `crusade_code` varchar(255) NOT NULL,
+  `video_url` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `salvation_clicks` int(11) DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `crusade_code` (`crusade_code`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Constraints for table `praise_crusades`
+--
+ALTER TABLE `praise_crusades`
+  ADD CONSTRAINT `praise_crusades_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_crusade_stats`
+--
+
+CREATE TABLE `praise_crusade_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crusade_id` int(11) NOT NULL,
+  `stream_key` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `stayed_for_a_minute` tinyint(1) NOT NULL DEFAULT '0',
+  `country` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `crusade_id` (`crusade_id`),
+  KEY `stream_key` (`stream_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Constraints for table `praise_crusade_stats`
+--
+ALTER TABLE `praise_crusade_stats`
+  ADD CONSTRAINT `praise_crusade_stats_ibfk_1` FOREIGN KEY (`crusade_id`) REFERENCES `praise_crusades` (`id`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_admins`
+--
+
+CREATE TABLE `praise_admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_live_tv`
+--
+
+CREATE TABLE `praise_live_tv` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `stream_url` varchar(255) NOT NULL,
+  `is_live` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_user_shared_streams`
+--
+
+CREATE TABLE `praise_user_shared_streams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `crusade_id` int(11) NOT NULL,
+  `stream_key` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stream_key` (`stream_key`),
+  KEY `user_id` (`user_id`),
+  KEY `crusade_id` (`crusade_id`),
+  CONSTRAINT `fk_user_shared_streams_user` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_shared_streams_crusade` FOREIGN KEY (`crusade_id`) REFERENCES `praise_crusades` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `praise_videos`
+--
+
+CREATE TABLE `praise_videos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `video_url` varchar(255) NOT NULL,
+  `age_category` varchar(50) NOT NULL,
+  `type_category` varchar(50) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `language` varchar(50) DEFAULT NULL,
+  `category_children_outreach` tinyint(1) DEFAULT '0',
+  `category_movie_outreach` tinyint(1) DEFAULT '0',
+  `category_ministrations` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `praise_salvation_clicks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crusade_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `crusade_id` (`crusade_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `praise_salvation_clicks_ibfk_1` FOREIGN KEY (`crusade_id`) REFERENCES `praise_crusades` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `praise_salvation_clicks_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `praise_crusade_stats` ADD `country` VARCHAR(100) NULL DEFAULT NULL AFTER `user_agent`;-- Create comments table for N-gage chat
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `property` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `xid` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Add salvation_clicks to praise_crusades if missing
+ALTER TABLE `praise_crusades`
+  ADD COLUMN `salvation_clicks` INT(11) NULL DEFAULT 0 AFTER `created_at`;
+-- Add gift-related columns to transactions
+ALTER TABLE `transactions`
+  ADD `gifted_user_id` int(11) NULL AFTER `user_id`,
+  ADD `gift_message` varchar(255) DEFAULT NULL AFTER `gifted_user_id`;
+
+ALTER TABLE `transactions`
+  ADD KEY `gifted_user_id` (`gifted_user_id`),
+  ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`gifted_user_id`) REFERENCES `praise_users` (`id`) ON DELETE SET NULL;
+-- Add subscription_status to praise_users table
+ALTER TABLE `praise_users` ADD `subscription_status` VARCHAR(20) NOT NULL DEFAULT 'inactive';
+
+-- Create subscriptions table
+CREATE TABLE `subscriptions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `subscription_type` varchar(50) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create transactions table
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `kc_handle` varchar(100) DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `proof_of_transaction` varchar(255) NOT NULL,
+  `subscription_type` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Add columns for scheduled crusades and is_active flag
+ALTER TABLE `praise_crusades`
+ADD `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+ADD `start_time` DATETIME NULL DEFAULT NULL,
+ADD `end_time` DATETIME NULL DEFAULT NULL;
+
+-- Create testimonies table
+CREATE TABLE `praise_testimonies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `testimony_text` text NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `praise_testimonies_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `praise_users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;-- Create rate_limits table for basic throttling
+CREATE TABLE `rate_limits` (
+  `rl_key` varchar(191) NOT NULL,
+  `attempts` int(11) NOT NULL DEFAULT 0,
+  `reset_at` datetime NOT NULL,
+  PRIMARY KEY (`rl_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Add remember_selector for "remember me" functionality
+ALTER TABLE `praise_users`
+ADD `remember_selector` VARCHAR(32) NULL DEFAULT NULL AFTER `remember_token`;
+CREATE TABLE `praise_salvation_gifts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Add is_active to praise_user_shared_streams
+ALTER TABLE `praise_user_shared_streams`
+  ADD COLUMN `is_active` TINYINT(1) NOT NULL DEFAULT 1 AFTER `stream_key`;
+-- Add columns to praise_crusade_stats for shared streams and engagement tracking
+ALTER TABLE `praise_crusade_stats`
+  ADD COLUMN `stream_key` VARCHAR(255) NULL DEFAULT NULL AFTER `crusade_id`,
+  ADD COLUMN `stayed_for_a_minute` TINYINT(1) NOT NULL DEFAULT 0 AFTER `user_agent`;
+
+-- Create praise_admins table if it does not exist
+CREATE TABLE `praise_admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Align praise_videos with production structure
+ALTER TABLE `praise_videos`
+  ADD COLUMN `video_url` VARCHAR(255) NOT NULL AFTER `title`;
+
+ALTER TABLE `praise_videos`
+  ADD COLUMN `language` VARCHAR(50) NULL DEFAULT NULL AFTER `created_at`;
+
+ALTER TABLE `praise_videos`
+  ADD COLUMN `category_children_outreach` TINYINT(1) NULL DEFAULT 0 AFTER `language`;
+
+ALTER TABLE `praise_videos`
+  ADD COLUMN `category_movie_outreach` TINYINT(1) NULL DEFAULT 0 AFTER `category_children_outreach`;
+
+ALTER TABLE `praise_videos`
+  ADD COLUMN `category_ministrations` TINYINT(1) NULL DEFAULT 0 AFTER `category_movie_outreach`;
+-- Add remember_token and token_expiry for "remember me" functionality
+ALTER TABLE `praise_users`
+ADD `remember_token` VARCHAR(255) NULL DEFAULT NULL AFTER `password`,
+ADD `token_expiry` DATETIME NULL DEFAULT NULL AFTER `remember_token`;
+
+-- Add reset_token and reset_expiry for password reset functionality
+ALTER TABLE `praise_users`
+ADD `reset_token` VARCHAR(255) NULL DEFAULT NULL AFTER `token_expiry`,
+ADD `reset_expiry` DATETIME NULL DEFAULT NULL AFTER `reset_token`;
+-- add_daily_room_column.sql
+ALTER TABLE `praise_meetings` ADD COLUMN `daily_room_url` VARCHAR(255) DEFAULT NULL;
+-- Add KingsChat ID column to praise_users table
+ALTER TABLE `praise_users` ADD `kingschat_id` VARCHAR(100) DEFAULT NULL;
+ALTER TABLE `praise_users` ADD UNIQUE KEY `kingschat_id` (`kingschat_id`);
+ALTER TABLE `praise_videos` ADD COLUMN `thumbnail_url` VARCHAR(255) NULL AFTER `video_url`;
+ALTER TABLE `praise_live_tv` ADD COLUMN `thumbnail_url` VARCHAR(255) NULL AFTER `stream_url`;

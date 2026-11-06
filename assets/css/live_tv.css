@@ -1,0 +1,230 @@
+
+/* assets/css/live_tv.css */
+
+:root {
+    --cinematic-bg: linear-gradient(135deg, #001f3f 0%, #000000 100%);
+    --cinematic-card-bg: rgba(28, 28, 28, 0.8);
+    --cinematic-text: #f0f0f0;
+    --live-dot-color: #ff0000;
+    --brand-glow-color: rgba(22, 133, 255, 0.5);
+}
+
+body {
+    background: var(--cinematic-bg) fixed !important;
+    color: var(--cinematic-text);
+    min-height: 100vh;
+}
+
+/* Featured Cinematic Hero Section */
+.cinematic-hero-section {
+    position: relative;
+    height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: left;
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
+}
+
+.cinematic-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 60%),
+        linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1) 60%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content .live-badge {
+    background-color: var(--live-dot-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px var(--live-dot-color), 0 0 25px var(--live-dot-color);
+}
+
+.hero-content .live-badge .fas.fa-circle {
+    animation: pulse 1.5s infinite;
+}
+
+.btn-watch-now {
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+}
+
+.btn-watch-now:hover {
+    background-color: var(--live-dot-color);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--live-dot-color);
+}
+
+/* Horizontal Stream Carousel */
+.stream-carousel-section {
+    padding: 2rem 0;
+}
+
+.stream-carousel-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.stream-carousel {
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem 2rem;
+    gap: 20px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.stream-carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.stream-card {
+    flex: 0 0 280px;
+    background-color: var(--cinematic-card-bg);
+    border: 1px solid #2a2a2a;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.stream-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--brand-glow-color);
+}
+
+.stream-card-img-wrapper {
+    position: relative;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+}
+
+.stream-card-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 10%, transparent 50%);
+}
+
+.stream-card .live-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--live-dot-color);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 0 10px var(--live-dot-color);
+}
+.stream-card .live-badge .fas.fa-circle {
+    font-size: 0.6em;
+    vertical-align: middle;
+    animation: pulse 1.5s infinite;
+}
+
+.stream-card-body {
+    padding: 15px;
+}
+
+.stream-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--cinematic-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stream-card-text {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+.no-streams-message {
+    text-align: center;
+    padding: 5rem;
+    color: #888;
+}
+
+.page-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 768px) {
+    .cinematic-hero-section {
+        height: 50vh;
+        padding: 1rem;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .stream-carousel {
+        padding: 1rem;
+    }
+    .stream-carousel-section h2 {
+        padding-left: 1rem;
+    }
+}
+
